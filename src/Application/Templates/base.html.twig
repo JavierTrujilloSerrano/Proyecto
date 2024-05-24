@@ -1,0 +1,95 @@
+{% block head %}
+<!doctype html>
+<html lang="es">
+<head>
+    <title>Calculadora Fulfillment</title>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Calculadora Fulfillment"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:locale" content="es_ES"/>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('assets/img/favicon.svg') }}">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" type="text/css"/>
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery-3.7.1.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.repeater/formrepeater.bundle.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {% endblock %}
+    {% block scripts %}
+    {% endblock %}
+</head>
+{% endblock %}
+
+<body class="bg-light">
+<header>
+    {% block view_title %}
+    {% endblock %}
+
+    {% block breadcrumbs %}
+    {% endblock %}
+    {% macro flashes(app) %}
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success d-flex align-items-center p-5 mx-8 mt-4">
+        <i class="ki-duotone ki-shield-tick fs-2hx text-success me-4">
+            <span class="path1"></span>
+            <span class="path2"></span>
+        </i>
+        <div class="d-flex flex-column">
+            <h4 class="mb-1 text-success">¡Genial!</h4>
+            <span>{{ message | trans }}</span>
+        </div>
+        {% endfor %}
+
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger d-flex align-items-center p-5 mx-8 mt-4">
+                <i class="ki-duotone ki-cross fs-2hx text-danger me-4">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                </i>
+                <div class="d-flex flex-column">
+                    <h4 class="mb-1 text-danger">¡Vaya!</h4>
+                    <span class="text-danger">{{ message | trans({}, 'exception') }}</span>
+                </div>
+            </div>
+        {% endfor %}
+        {% endmacro %}
+    </div>
+
+    {% block view_toolbar_button %}
+    {% endblock %}
+</header>
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+<footer class="w-100 mt-5 align-content-end{% block footer_classes %}{% endblock %}">
+    <div class="d-flex mt-5 py-4 px-4 bg-primary">
+        <div class="align-items-center text-white mb-3">
+            Copyright © {{ "now"|date('Y') }}. All rights reserved.
+        </div>
+        <div>
+            <a href="#!" class="text-white me-4">
+                <i class="fab fa-facebook-f">
+            </a>
+            <a href="#!" class="text-white me-4">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#!" class="text-white me-4">
+                <i class="fab fa-google"></i>
+            </a>
+            <a href="#!" class="text-white">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+</html>
+
+

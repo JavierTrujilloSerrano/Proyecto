@@ -1,0 +1,49 @@
+exception:
+  wms:
+    id_not_found: 'No ha sido posible encontrar la asociación entre EAN e identificador interno en el almacén'
+    article_not_found_in_wms: 'No ha sido posible encontrar alguno de los artículos en el almacén'
+    barcode_not_found_in_wms: 'No ha sido posible encontrar este código de barras en el almacén'
+    article_unable_to_create: 'No ha sido posible crear el artículo en el almacén'
+    order_not_found: 'No ha sido posible encontrar este pedido en el almacén'
+    order_id_mismatch: 'Se ha recibido un pedido con identificador distinto al solicitado desde almacén'
+    reception_not_found_in_wms: 'No ha sido posible encontrar la recepción en el almacén'
+    reception_id_mismatch: 'Se ha recibido una recepción con identificador distinto al solicitado desde almacén'
+    wms_unknown_error: 'Se ha producido un error en la comunicación con almacén'
+    unknown_order_status: 'Se ha recibido un estado desconocido para el pedido desde el almacén'
+  tms:
+    connection_error: 'No ha sido posible conectar con el servicio de transporte'
+    order_id_mismatch: 'Se ha recibido un pedido con identificador distinto al solicitado desde el servicio de transporte'
+    carrier_not_found: 'No se ha podido encontrar el transportista'
+    order_not_found: 'No ha sido posible encontrar este pedido en el servicio de transporte'
+    unknown_order_status: 'Se ha recibido un estado desconocido para el pedido desde el servicio de transporte'
+    collect_point_not_found: 'Punto de recogida no encontrado en el servicio de transporte'
+  order:
+    not_found: 'No se ha encontrado el pedido'
+    not_cancellable: 'No es posible cancelar el pedido'
+    article_not_found: 'Alguno de los artículos no se ha podido encontrar al crear el pedido'
+    reference_in_use: 'La referencia proporcionada ya está en uso por otro pedido'
+  return_order:
+    not_found: 'No se ha encontrado la devolución'
+    not_cancellable: 'No es posible cancelar la devolución'
+    internal_error: 'Ha ocurrido un error en al comunicación con TMS'
+  shipping_service:
+    not_found: 'No se ha encontrado el método de envío'
+  article:
+    supplier_id_mismatch: 'El artículo seleccionado no es del mismo proveedor'
+    not_enough_stock: 'El artículo no tiene suficiente stock para crear el pedido'
+    article_not_found: 'No se ha encontrado el artículo'
+  reception:
+    reception_not_found: 'No ha sido posible encontrar la recepción'
+    reception_not_cancellable: 'No es posible cancelar la recepción'
+    shipping_label_not_available: 'El estado actual no permite imprimir la etiqueta de envío'
+  generic:
+    access_denied: 'No se ha podido acceder al recurso solicitado'
+  provider_sku_mapping:
+    not_found: 'No se ha podido encontrar la asociación al SKU'
+    already_mapped: 'El SKU ya tiene una asociación con un artículo'
+  changelog:
+    not_found: 'No se ha podido encontrar el Changelog'
+  help_page:
+    not_found: 'No se ha podido encontrar la página de ayuda'
+  quoted_article:
+    not_found: 'No se ha podido encontrar el artículo'

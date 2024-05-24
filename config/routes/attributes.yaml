@@ -1,0 +1,9 @@
+web_application_controllers:
+  resource:
+    path: ../../src/Infrastructure/Entrypoint/MVC/
+    namespace: Proyecto\Infrastructure\Entrypoint\MVC
+  type: attribute
+
+  #services:
+  #DataFixtures\:
+  #  resource: '../../src/Infrastructure/Fixtures/*Fixtures.php'

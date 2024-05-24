@@ -1,0 +1,82 @@
+{% extends "base.html.twig" %}
+{% trans_default_domain 'cost_simulator' %}
+{% block view_title %}
+    {% if quotedArticle is defined %}
+        <h1 class="m-4"> {{ 'list.update_quotedArticle'|trans|capitalize }} {{ quotedArticle.name }}</h1>
+    {% else %}
+        <h1 class="m-4"> {{ 'create_article_cost_simulator_breadcrumbs'|trans|capitalize }}</h1>
+    {% endif %}
+{% endblock %}
+
+{% block breadcrumbs %}
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{ path('admin_cost_simulator') }}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"></path>
+                </svg>
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ path('admin_cost_simulator') }}">{{ 'home_breadcrumbs'|trans |capitalize }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ path('admin_quoted_article') }}">{{ 'list_cost_simulator_breadcrumbs'|trans |capitalize }}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="text-muted">
+                {% if quotedArticle is defined %}
+                    {{ 'list.update_quotedArticle'|trans|capitalize }} {{ quotedArticle.name }}
+                {% else %}
+                    {{ 'create_article_cost_simulator_breadcrumbs'|trans|capitalize }}
+                {% endif %}
+            </a>
+        </li>
+    </ol>
+{% endblock %}
+{% block content %}
+    <div class="card border-0">
+        <div class="card-body">
+            <h2>{{ 'list.product_list'|trans|capitalize }}</h2>
+            <div class="card border-0">
+                <div class="">
+                    {{ form_start(form) }}
+                    <div class="card-body d-flex row">
+                        <div class="col">
+                            {{ form_label(form.name, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.name,{'attr': {'class': 'form-control form-control-solid'}}) }}
+                            <div class="form-error">
+                                {{ form_errors(form.name) }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            {{ form_label(form.volumeInM3, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.volumeInM3, {'attr': {'class': 'form-control form-control-solid'}}) }}
+                            <div class="form-error">
+                                {{ form_errors(form.volumeInM3) }}
+                            </div>
+                        </div>
+                        <div class="col">
+                            {{ form_label(form.weightInGrams, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.weightInGrams, {'attr': {'class': 'form-control form-control-solid'}}) }}
+                            <div class="form-error">
+                                {{ form_errors(form.weightInGrams) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="{{ path('admin_quoted_article') }}" class="btn btn-primary">
+                            <i class="fa fa-chevron-left"></i> {{ 'list.btn_return'|trans|capitalize }}
+                        </a>
+                        {{ form_widget(form.save,{'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer_classes %} fixed-bottom {% endblock %}
+

@@ -1,0 +1,31 @@
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    volumes:
+      - .:/var/www/html:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    container_name: php-fpm
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    volumes:
+      - .:/var/www/html
+      - ~/.composer:/.composer
+
+  postgres:
+    container_name: postgres
+    env_file:
+      - .env
+    image: postgres:16.2
+    ports:
+      - "5432:5432"

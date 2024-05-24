@@ -1,0 +1,9 @@
+form:
+  email: "dirección de email"
+  pass: "contraseña"
+  remember: "recuérdame"
+  forgot: "¿Contraseña olvidada?"
+  not_account: "¿No tienes cuenta?"
+  register: "registrarse"
+  place_email: "Introduzca una dirección de correo"
+  place_pass: "Introduzca su contraseña"

@@ -1,0 +1,5 @@
+services:
+  Proyecto\Infrastructure\Fixtures\:
+    autowire: true
+    autoconfigure: true
+    resource: '../../../src/Infrastructure/Fixtures/*Fixtures.php'

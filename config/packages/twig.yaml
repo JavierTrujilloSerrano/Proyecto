@@ -1,0 +1,8 @@
+twig:
+    default_path: '%kernel.project_dir%/src/Application/Templates'
+    date:
+        timezone: 'Europe/Madrid'
+
+when@test:
+    twig:
+        strict_variables: true
