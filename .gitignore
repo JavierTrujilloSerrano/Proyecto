@@ -1,5 +1,9 @@
 .idea
 ###> symfony/framework-bundle ###
+/node_modules
+*.log
+.env
+.env.test
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -7,6 +11,7 @@
 /public/bundles/
 /var/
 /vendor/
+importmap.php
 ###< symfony/framework-bundle ###
 /phpstorm.pub
 phpstorm
