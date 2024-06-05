@@ -1,6 +1,6 @@
 UID=$(shell id -u)
 GID=$(shell id -g)
-DOCKER_PHP_SERVICE=php-fpm
+DOCKER_PHP_SERVICE= php-fpm
 DOCKER_DB_SERVICE=postgres
 DOCKER_DB_PORT=5432
 DOCKER_LOCALSTACK_SERVICE=localstack
@@ -24,3 +24,14 @@ bash:
 composer-install:
 		docker compose run --rm -u ${UID}:${GID} ${DOCKER_PHP_SERVICES} composer install
 
+cache:
+		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console cache:clear
+
+recreate-db-and-fixtures:
+		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:database:drop --force
+		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:database:create
+		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:schema:create
+		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:fixtures:load
+
+grumphp:
+		docker compose run --rm -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} grumphp run

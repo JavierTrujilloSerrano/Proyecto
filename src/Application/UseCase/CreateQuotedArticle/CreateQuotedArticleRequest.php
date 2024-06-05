@@ -21,7 +21,7 @@ class CreateQuotedArticleRequest extends AbstractRequest
 
     public static function messageName(): string
     {
-        return 'pccomponentes.fulfillment.1.request.quoted_article.create';
+        return 'Proyecto.1.request.quoted_article.created';
     }
 
     public function id(): Uuid
@@ -46,8 +46,10 @@ class CreateQuotedArticleRequest extends AbstractRequest
 
     public function assertPayload(): void
     {
+        //obtenemos el payload del mensaje
         $payload = $this->messagePayload();
 
+        //verificamos que los datos que nos llegan son correctos
         Assert::lazy()->tryAll()
             ->that($payload, 'payload')->isArray()
             ->keyExists(self::PARAM_ID)
@@ -63,6 +65,7 @@ class CreateQuotedArticleRequest extends AbstractRequest
             ->that($payload[self::PARAM_WEIGHT], self::PARAM_WEIGHT)->notNull()->integerish()->greaterOrEqualThan(0)
             ->verifyNow();
 
+        //si las verificaciones pasan, asigna los valores del payload a las propiedades del objeto
         $this->id = Uuid::fromRfc4122($payload[self::PARAM_ID]);
         $this->name = (string) $payload[self::PARAM_NAME];
         $this->volume = (float) $payload[self::PARAM_VOLUME];

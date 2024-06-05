@@ -19,11 +19,13 @@ use Symfony\Component\Uid\Uuid;
  */
 class QuotedArticleRepository extends AbstractRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, QuotedArticle::class);
     }
 
+    //consulta a la base de datos
     /** @return array<string, QuotedArticle> */
     public function findAllSortedByName(): array
     {

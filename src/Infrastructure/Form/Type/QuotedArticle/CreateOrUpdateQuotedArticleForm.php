@@ -14,8 +14,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class CreateOrUpdateQuotedArticleForm extends AbstractType
 {
+    //Creación del formulario para poder crear o actualizar un QuotedArticle con sus atributos
+    //ejem placehoder, restricciones, valor mínimo ...
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        //campos que se crean
         $builder
             ->add('name', TextType::class, [
                 'label' => new TranslatableMessage('quoted_article.name', [], 'forms'),
@@ -26,7 +29,7 @@ class CreateOrUpdateQuotedArticleForm extends AbstractType
                     'placeholder' => new TranslatableMessage('quoted_article.name', [], 'forms'),
                 ],
             ])
-            ->add('volumeInM3', NumberType::class, [
+            ->add('volumeInCm3', NumberType::class, [
                 'label' => new TranslatableMessage('quoted_article.volume', [], 'forms'),
                 'constraints' => [
                     new NotBlank(),
@@ -35,14 +38,13 @@ class CreateOrUpdateQuotedArticleForm extends AbstractType
                     'placeholder' => new TranslatableMessage('quoted_article.volume', [], 'forms'),
                     'min'=> 0,
                 ],
-                'scale' => 10,
-                'rounding_mode' => \NumberFormatter::ROUND_HALFUP,
+                'scale' => 2,
+                'rounding_mode' => \NumberFormatter::ROUND_UP,
             ])
             ->add('weightInGrams', IntegerType::class, [
                 'label' => new TranslatableMessage('quoted_article.weight', [], 'forms'),
                 'constraints' => [
                     new NotBlank(),
-
                 ],
                 'attr' => [
                     'placeholder' => new TranslatableMessage('quoted_article.weight', [], 'forms'),
@@ -50,7 +52,7 @@ class CreateOrUpdateQuotedArticleForm extends AbstractType
                 ],
 
             ])
-
+            //crea el botón de guardar
             ->add('save', SubmitType::class, [
                 'label' => new TranslatableMessage('quoted_article.save_btn', [], 'forms'),
             ]);

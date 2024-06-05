@@ -47,7 +47,7 @@ class UpdateQuotedArticleTest extends TestCase
 
         $this->useCase->__invoke($request);
         $this->assertEquals('updated name', $quotedArticle->name());
-        $this->assertEquals(1001.00, $quotedArticle->volumeInM3());
+        $this->assertEquals(1001.00, $quotedArticle->volumeInCm3());
         $this->assertEquals(2001, $quotedArticle->weightInGrams());
     }
 

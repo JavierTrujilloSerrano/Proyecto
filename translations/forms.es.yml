@@ -1,5 +1,5 @@
 quoted_article:
     name: 'Nombre del producto'
-    volume: 'Volumen (m3)'
+    volume: 'Volumen (cm3)'
     weight: 'Peso (gr.)'
     save_btn: 'Guardar'

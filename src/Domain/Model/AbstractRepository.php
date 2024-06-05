@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Proyecto\Domain\Model;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
 
 abstract class AbstractRepository extends ServiceEntityRepository
 {

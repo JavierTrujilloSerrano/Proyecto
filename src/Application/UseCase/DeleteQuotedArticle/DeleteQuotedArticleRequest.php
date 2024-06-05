@@ -15,7 +15,7 @@ class DeleteQuotedArticleRequest extends AbstractRequest
 
     public static function messageName(): string
     {
-        return 'pccomponentes.fulfillment.1.request.quoted_article.delete';
+        return 'Proyecto.1.request.quoted_article.deleted';
     }
 
     public function id(): Uuid

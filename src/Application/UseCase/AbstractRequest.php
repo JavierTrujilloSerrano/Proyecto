@@ -48,7 +48,6 @@ abstract class AbstractRequest implements AbstractRequestInterface
 
     abstract protected function assertPayload(): void;
 
-    // @codingStandardsIgnoreStart
     private function assertPrimitivePayload(array &$payload, string $index = 'payload'): void
     {
         \array_walk(
@@ -73,5 +72,4 @@ abstract class AbstractRequest implements AbstractRequestInterface
             },
         );
     }
-    // @codingStandardsIgnoreEnd
 }

@@ -1,0 +1,5 @@
+notification:
+  quotedArticle:
+    created: 'Se ha creado el artículo %%name%%'
+    updated: 'Se ha actualizado el artículo %%name%%'
+    deleted: 'Se ha eliminado el artíclo %%name%%'

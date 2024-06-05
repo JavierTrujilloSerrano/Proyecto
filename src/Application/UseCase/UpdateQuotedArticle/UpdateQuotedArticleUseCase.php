@@ -26,7 +26,7 @@ readonly class UpdateQuotedArticleUseCase
 
         $quotedArticle
             ->setName($request->name())
-            ->setVolumeInM3($request->volume())
+            ->setVolumeInCm3($request->volume())
             ->setWeightInGrams($request->weight());
 
         $this->quotedArticleRepository->flush();

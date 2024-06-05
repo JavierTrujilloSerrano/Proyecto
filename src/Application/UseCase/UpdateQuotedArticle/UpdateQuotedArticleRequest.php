@@ -21,7 +21,7 @@ class UpdateQuotedArticleRequest extends AbstractRequest
 
     public static function messageName(): string
     {
-        return 'pccomponentes.fulfillment.1.request.quoted_article.update';
+        return 'Proyecto.1.request.quoted_article.updated';
     }
 
     public function assertPayload(): void

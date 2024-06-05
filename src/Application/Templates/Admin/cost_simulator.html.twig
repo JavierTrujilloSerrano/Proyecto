@@ -1,12 +1,19 @@
+{# --------------------------------------------------------EXTENSIÓN DE LA PLANTILLA, ARCHIVO DE TRADUCCIÓN PARA LA PAGÍNA-------------------------------------------------------- #}
+
 {% extends "base.html.twig" %}
 {% trans_default_domain 'cost_simulator' %}
+
+{# --------------------------------------------------------APARTADO DE LOS TÍTULOS-------------------------------------------------------- #}
+
 {% block view_title %}
     <h1 class="m-4">{{ 'page_title'|trans }}</h1>
 {% endblock %}
 
+{# --------------------------------------------------------APARTADO MIGAS DE PAN-------------------------------------------------------- #}
+
 {% block breadcrumbs %}
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb ms-4">
             <li class="breadcrumb-item">
                 <a href="{{ path('login-view') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -21,6 +28,8 @@
         </ol>
     </nav>
 {% endblock %}
+
+{# --------------------------------------------------------APARTADO PARA LOS BOTONES DE SUPERIORES-------------------------------------------------------- #}
 
 {% block view_toolbar_button %}
     <div class="d-flex justify-content-end mx-5">
@@ -38,9 +47,21 @@
 {% endblock %}
 
 {% block content %}
+
+    {# --------------------------------------------------------CARD DONDE ESTA INCLUIDO EL ACORDEÓN -------------------------------------------------------- #}
+
     <div class="card border-0">
+
+        {# --------------------------------------------------------CARD BODY -------------------------------------------------------- #}
+
         <div class="card-body">
+
+            {# --------------------------------------------------------ACORDEÓN -------------------------------------------------------- #}
+
             <div class="accordion" id="accordion-1">
+
+                {# --------------------------------------------------------ACORDEÓN ENTRADAS-------------------------------------------------------- #}
+
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="accordion-header-reception">
                         <button class="accordion-button fs-4 text-primary text-start pe-4"
@@ -60,8 +81,7 @@
                     </h2>
                     <div id="accordion-body-reception" class="accordion-collapse collapse show">
                         <div class="accordion-body">
-                            <p class="text-muted">
-                                <strong>{{ 'paragraphs.info_reception'|trans|capitalize }}</strong></p>
+                            <H5 class="mb-4">{{ 'paragraphs.info_reception'|trans|capitalize }}</H5>
                             <div class="row d-flex align-items-end">
                                 <div class="text-muted col-2">
                                     <label for="reception-pallet-price">{{ 'list.pallet_price'|trans|capitalize }}</label>
@@ -96,7 +116,10 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="border border-top-dashed border-primary mt-2"></div>
+                            <div class="border border-top border-primary mt-2"></div>
+
+                            {# --------------------------------------------------------REPEATER ENTRADAS-------------------------------------------------------- #}
+
                             <div id="repeater-reception">
                                 <div class="mt-4">
                                     <div data-repeater-list="data-repeater-reception">
@@ -128,9 +151,11 @@
                                                 <div class="col-md-2">
                                                     <select id="reception-type" name="reception-type"
                                                             class="form-select">
-                                                        <option value="pallet">{{ 'list.pallet'|trans|capitalize }}
+                                                        <option value="pallet">
+                                                            {{ 'list.pallet'|trans|capitalize }}
                                                         </option>
-                                                        <option value="box">{{ 'list.box'|trans|capitalize }}
+                                                        <option value="box">
+                                                            {{ 'list.box'|trans|capitalize }}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -197,6 +222,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div id="reception" class="mt-1">
                                     <button href="javascript:void(0)" data-repeater-create
                                             class="d-flex align-items-center btn btn-primary">
@@ -211,9 +237,17 @@
                                     </button>
                                 </div>
                             </div>
+
+                            {# --------------------------------------------------------FIN REPEATER ENTRADAS-------------------------------------------------------- #}
+
                         </div>
                     </div>
                 </div>
+
+                {# --------------------------------------------------------FIN ACORDEÓN ENTRADAS-------------------------------------------------------- #}
+
+                {# --------------------------------------------------------ACORDEÓN PEDIDOS-------------------------------------------------------- #}
+
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="accordion-header-orders">
                         <button class="accordion-button collapsed fs-4 text-primary text-start pe-4"
@@ -232,8 +266,7 @@
                     </h2>
                     <div id="accordion-body-orders" class="accordion-collapse collapse">
                         <div class="accordion-body">
-                            <p class="text-muted"><strong>{{ 'paragraphs.info_order'|trans|capitalize }}</strong>
-                            </p>
+                            <H5 class="mb-4">{{ 'paragraphs.info_order'|trans|capitalize }}</H5>
                             <div class="row d-flex align-items-end">
                                 <div class="text-muted col-md-3">
                                     <label for="load-order-preparation">{{ 'list.preparation_price'|trans|capitalize }}</label>
@@ -266,7 +299,9 @@
                                 <div class="col-md-6">{{ 'list.product'|trans|upper }}</div>
                                 <div class="col-md-4">{{ 'list.shipping_region'|trans|upper }}</div>
                             </div>
-                            {# REPEATER DE LAS ORDENES -------------------------------------------------------- #}
+
+                            {# --------------------------------------------------------REPEATER PEDIDOS-------------------------------------------------------- #}
+
                             <div id="repeater-orders">
                                 <div data-repeater-list="data-repeater-orders">
                                     <div data-repeater-item>
@@ -298,7 +333,7 @@
                                                         data-placeholder="{{ 'list.select_province'|trans|capitalize }}">
                                                     <option></option>
                                                     {% for shipmentDeliveryZone, details in shipmentDeliveryZones %}
-                                                        <option value="{{ details.value }}">
+                                                        <option value={{ details.value }}>
                                                             {{ ('province.' ~ shipmentDeliveryZone)|trans|capitalize }}
                                                         </option>
                                                     {% endfor %}
@@ -334,278 +369,320 @@
                                     </button>
                                 </div>
                             </div>
+
+                            {# --------------------------------------------------------FIN REPEATER PEDIDOS-------------------------------------------------------- #}
+
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="accordion-header-returns">
-                            <button class="accordion-button collapsed fs-4 text-primary text-start pe-4"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#accordion-body-returns"
-                                    aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                     class="bi bi-repeat" viewBox="0 0 16 16">
-                                    <path d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z"></path>
-                                </svg>
-                                <span class="fw-bold ps-2">
+                </div>
+
+                {# --------------------------------------------------------FIN ACORDEÓN PEDIDOS-------------------------------------------------------- #}
+
+                {# --------------------------------------------------------ACORDEÓN DEVOLUCIONES-------------------------------------------------------- #}
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="accordion-header-returns">
+                        <button class="accordion-button collapsed fs-4 text-primary text-start pe-4"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#accordion-body-returns"
+                                aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                 class="bi bi-repeat" viewBox="0 0 16 16">
+                                <path d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192m3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z"></path>
+                            </svg>
+                            <span class="fw-bold ps-2">
                                 {{ 'list.returns'|trans|capitalize }}
                                 </span>
-                            </button>
-                        </h2>
-                        <div id="accordion-body-returns" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <p class="text-muted">
-                                    <strong>{{ 'paragraphs.info_returns'|trans|capitalize }}</strong></p>
-                                <div class="row d-flex align-items-end">
-                                    <div class="text-muted col-md-4">
-                                        <label for="load-returns">{{ 'list.return_review'|trans|capitalize }}</label>
-                                        <input id="load-returns" type="number" min="0" name="load-returns"
-                                               class="form-control"
-                                               value="0">
-                                    </div>
-                                    <div class="text-muted col-md-4">
-                                        <label for="load-returns-review">{{ 'list.review'|trans|capitalize }}</label>
-                                        <input id="load-returns-review" type="number" min="0"
-                                               name="load-returns-review"
-                                               class="form-control"
-                                               value="0">
-                                    </div>
-                                    <div class="align-self-end col-md-2">
-                                        <button class="btn btn-primary"
-                                                onclick="priceReturns()">{{ 'list.btn_load'|trans|capitalize }}</button>
-                                    </div>
+                        </button>
+                    </h2>
+                    <div id="accordion-body-returns" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <h5 class="mb-4">{{ 'paragraphs.info_returns'|trans|capitalize }}</h5>
+                            <div class="row d-flex align-items-end">
+                                <div class="text-muted col-md-4">
+                                    <label for="load-returns">{{ 'list.return_review'|trans|capitalize }}</label>
+                                    <input id="load-returns" type="number" min="0" name="load-returns"
+                                           class="form-control"
+                                           value="0">
                                 </div>
-                                <div class="border border-primary mt-2"></div>
-                                <div class="row d-flex align-items-end ps-2 mt-3 text-gray-600 fw-bolder fs-4">
-                                    <div class="col-md-2">{{ 'list.number_of_orders'|trans |upper }}</div>
-                                    <div class="col-md-5">{{ 'list.product'|trans |upper }}</div>
-                                    <div class="col-md-3">{{ 'list.shipping_region'|trans |upper }}</div>
+                                <div class="text-muted col-md-4">
+                                    <label for="load-returns-review">{{ 'list.review'|trans|capitalize }}</label>
+                                    <input id="load-returns-review" type="number" min="0"
+                                           name="load-returns-review"
+                                           class="form-control"
+                                           value="0">
                                 </div>
-                                <div id="repeater-returns">
-                                    <div>
-                                        <div data-repeater-list="data-returns">
-                                            <div data-repeater-item>
-                                                <div class="row my-4">
-                                                    <div class="col-md-2">
-                                                        <input type="number" name="returns-number" min="0"
-                                                               class="form-control mb-2 mb-md-0"
-                                                               placeholder="0"/>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <select name="returns-products"
-                                                                class="form-select form-select-solid"
-                                                                data-repeater-returns="select"
-                                                                data-close-on-select="false"
-                                                                data-placeholder="{{ 'list.select_products'|trans|capitalize }}"
-                                                                data-allow-clear="true"
-                                                                multiple="multiple"
-                                                                tabindex="-1">
-                                                            <option></option>
-                                                            {% for quotedArticle in quotedArticles %}
-                                                                <option value="{{ quotedArticle.id }}">{{ quotedArticle.name|trans|capitalize }}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <select name="returns-zone"
-                                                                class="form-input"
-                                                                data-repeater-returns="select"
-                                                                data-placeholder="{{ 'list.select_province'|trans|capitalize }}">
-                                                            <option></option>
-                                                            {% for shipmentDeliveryZone, details in shipmentDeliveryZones %}
-                                                                <option value="{{ details.value }}">
-                                                                    {{ ('province.' ~ shipmentDeliveryZone)|trans|capitalize }}
-                                                                </option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-1 ">
-                                                        <button class="btn btn-danger"
-                                                                data-repeater-delete
-                                                                type="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                 width="20"
-                                                                 height="20" fill="currentColor"
-                                                                 class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
-                                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                <div class="align-self-end col-md-2">
+                                    <button class="btn btn-primary"
+                                            onclick="priceReturns()">{{ 'list.btn_load'|trans|capitalize }}</button>
+                                </div>
+                            </div>
+                            <div class="border border-primary mt-2"></div>
+                            <div class="row d-flex align-items-end ps-2 mt-3 text-gray-600 fw-bolder fs-4">
+                                <div class="col-md-2">{{ 'list.number_of_orders'|trans |upper }}</div>
+                                <div class="col-md-5">{{ 'list.product'|trans |upper }}</div>
+                                <div class="col-md-3">{{ 'list.shipping_region'|trans |upper }}</div>
+                            </div>
+
+                            {# --------------------------------------------------------REPEATER DE LAS DEVOLUCIONES-------------------------------------------------------- #}
+
+                            <div id="repeater-returns">
+                                <div data-repeater-list="data-returns">
+                                    <div data-repeater-item>
+                                        <div class="row my-4">
+                                            <div class="col-md-2">
+                                                <input type="number" name="returns-number" min="0"
+                                                       class="form-control mb-2 mb-md-0"
+                                                       placeholder="0"/>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <select name="returns-products"
+                                                        class="form-select form-select-solid"
+                                                        data-repeater-returns="select"
+                                                        data-close-on-select="false"
+                                                        data-placeholder="{{ 'list.select_products'|trans|capitalize }}"
+                                                        data-allow-clear="true"
+                                                        multiple="multiple"
+                                                        tabindex="-1">
+                                                    <option></option>
+                                                    {% for quotedArticle in quotedArticles %}
+                                                        <option value="{{ quotedArticle.id }}">{{ quotedArticle.name|trans|capitalize }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select name="returns-zone"
+                                                        class="form-input"
+                                                        data-repeater-returns="select"
+                                                        data-placeholder="{{ 'list.select_province'|trans|capitalize }}">
+                                                    <option></option>
+                                                    {% for shipmentDeliveryZone, details in shipmentDeliveryZones %}
+                                                        <option value={{ details.value }}>
+                                                            {{ ('province.' ~ shipmentDeliveryZone)|trans|capitalize }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col-md-1 ">
+                                                <button class="btn btn-danger"
+                                                        data-repeater-delete
+                                                        type="button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         width="20"
+                                                         height="20" fill="currentColor"
+                                                         class="bi bi-trash" viewBox="0 0 16 16">
+                                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
+                                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
+                                                    </svg>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mt-3">
-                                        <button href="javascript:void(0)" data-repeater-create
-                                                class="btn btn-flex btn-primary d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                 fill="currentColor" class="bi bi-plus-square me-2" viewBox="0 0 16 16">
-                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
-                                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
-                                            </svg>
-                                            <span>
+                                </div>
+                                <div class="mt-3">
+                                    <button href="javascript:void(0)" data-repeater-create
+                                            class="btn btn-flex btn-primary d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-plus-square me-2" viewBox="0 0 16 16">
+                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"></path>
+                                        </svg>
+                                        <span>
                                                 {{ 'list.btn_add'|trans|capitalize }}
                                             </span>
-                                        </button>
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
+
+                            {# --------------------------------------------------------FIN REPEATER DE LAS DEVOLUCIONES-------------------------------------------------------- #}
+
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="accordion-header-storage">
-                            <button class="accordion-button collapsed fs-4 text-primary text-start pe-4"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#accordion-body-storage"
-                                    aria-expanded="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                     class="bi bi-boxes" viewBox="0 0 16 16">
-                                    <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434zM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567zM7.5 9.933l-2.75 1.571v3.134l2.75-1.571zm1 3.134 2.75 1.571v-3.134L8.5 9.933zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567zm2.242-2.433V3.504L8.5 5.076V8.21zM7.5 8.21V5.076L4.75 3.504v3.134zM5.258 2.643 8 4.21l2.742-1.567L8 1.076zM15 9.933l-2.75 1.571v3.134L15 13.067zM3.75 14.638v-3.134L1 9.933v3.134z"></path>
-                                </svg>
-                                <span class="fw-bold ps-2">
+                </div>
+
+                {# --------------------------------------------------------FIN ACORDEÓN DEVOLUCIONES-------------------------------------------------------- #}
+
+                {# --------------------------------------------------------ACORDEÓN ALMACENAMIENTO-------------------------------------------------------- #}
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="accordion-header-storage">
+                        <button class="accordion-button collapsed fs-4 text-primary text-start pe-4"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#accordion-body-storage"
+                                aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                 class="bi bi-boxes" viewBox="0 0 16 16">
+                                <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434zM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567zM7.5 9.933l-2.75 1.571v3.134l2.75-1.571zm1 3.134 2.75 1.571v-3.134L8.5 9.933zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567zm2.242-2.433V3.504L8.5 5.076V8.21zM7.5 8.21V5.076L4.75 3.504v3.134zM5.258 2.643 8 4.21l2.742-1.567L8 1.076zM15 9.933l-2.75 1.571v3.134L15 13.067zM3.75 14.638v-3.134L1 9.933v3.134z"></path>
+                            </svg>
+                            <span class="fw-bold ps-2">
                                 {{ 'list.storage'|trans|capitalize }}
                                 </span>
-                            </button>
-                        </h2>
-                        <div id="accordion-body-storage" class="accordion-collapse collapse">
-                            <div class="accordion-body">
-                                <p class="text-muted">
-                                    <strong>{{ 'paragraphs.info_storage'|trans|capitalize }}</strong></p>
-                                <div class="row d-flex align-items-end">
-                                    <div class="text-muted col-md-3">
-                                        <label for="load-storage">{{ 'list.pallet_price'|trans|capitalize }}</label>
-                                        <input id="load-storage" type="number" min="0" name="load-storage"
-                                               class="form-control"
-                                               value="0">
-                                    </div>
-                                    <div class="text-muted col-md-3">
-                                        <label for="load-storage-piking-location">{{ 'list.picking_location_price'|trans|capitalize }}</label>
-                                        <input id="load-storage-piking-location" type="number" min="0"
-                                               name="load-storage-piking-location" class="form-control"
-                                               value="0">
-                                    </div>
-                                    <div class="align-self-end col-md-3">
-                                        <button class="btn btn-primary" onclick="priceStorage()">
-                                            {{ 'list.btn_load'|trans|capitalize }}
-                                        </button>
-                                    </div>
+                        </button>
+                    </h2>
+                    <div id="accordion-body-storage" class="accordion-collapse collapse">
+                        <div class="accordion-body">
+                            <h5 class="mb-4">{{ 'paragraphs.info_storage'|trans|capitalize }}</h5>
+                            <div class="row d-flex align-items-end">
+                                <div class="text-muted col-md-3">
+                                    <label for="load-storage">{{ 'list.pallet_price'|trans|capitalize }}</label>
+                                    <input id="load-storage" type="number" min="0" name="load-storage"
+                                           class="form-control"
+                                           value="0">
                                 </div>
-                                <div class="border border-primary mt-2"></div>
-                                <div class="row ps-2 mt-5 text-gray-600 fw-bolder fs-4">
-                                    <div class="col-sm-5">{{ 'list.volume'|trans |upper }}</div>
-                                    <div class="col-sm-5">{{ 'list.picking_location'|trans |upper }}</div>
+                                <div class="text-muted col-md-3">
+                                    <label for="load-storage-piking-location">{{ 'list.picking_location_price'|trans|capitalize }}</label>
+                                    <input id="load-storage-piking-location" type="number" min="0"
+                                           name="load-storage-piking-location" class="form-control"
+                                           value="0">
                                 </div>
-                                <div class="d-flex">
-                                    <div class="form col-sm-5 me-2">
-                                        <input id="volume" type="number" min="0" name="volume-pallet"
-                                               class="form-control"
-                                               placeholder="0">
-                                    </div>
-                                    <div class="form col-sm-5 me-2">
-                                        <input id="n-picking" type="number" min="0" name="picking"
-                                               class="form-control"
-                                               placeholder="0">
-                                    </div>
+                                <div class="align-self-end col-md-3">
+                                    <button class="btn btn-primary" onclick="priceStorage()">
+                                        {{ 'list.btn_load'|trans|capitalize }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="border border-primary mt-2"></div>
+                            <div class="row ps-2 mt-5 text-gray-600 fw-bolder fs-4">
+                                <div class="col-sm-5">{{ 'list.volume'|trans |upper }}</div>
+                                <div class="col-sm-5">{{ 'list.picking_location'|trans |upper }}</div>
+                            </div>
+                            <div class="d-flex">
+                                <div class="form col-sm-5 me-2">
+                                    <input id="volume" type="number" min="0" name="volume-pallet"
+                                           class="form-control"
+                                           placeholder="0">
+                                </div>
+                                <div class="form col-sm-5 me-2">
+                                    <input id="n-picking" type="number" min="0" name="picking"
+                                           class="form-control"
+                                           placeholder="0">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {# --------------------------------------------------------FIN ACORDEÓN ALMACENAMIENTO-------------------------------------------------------- #}
+
             </div>
-            {% set dateNow = "now" %}
-            <div class="d-flex mx-5 justify-content-end pt-2 mb-6">
-                <button id="calculator" type="button" class="btn btn-primary d-flex align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-calculator me-2" viewBox="0 0 16 16">
-                        <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
-                        <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"></path>
-                    </svg>
-                    <span>
+
+            {# --------------------------------------------------------FIN ACORDEÓN-------------------------------------------------------- #}
+
+        </div>
+
+        {# --------------------------------------------------------FIN CARD BODY-------------------------------------------------------- #}
+
+        {# VARIABLE PARA LA FECHA #}
+        {% set dateNow = "now" %}
+
+        {# --------------------------------------------------------BOTÓN CALCULAR-------------------------------------------------------- #}
+
+        <div class="d-flex mx-5 justify-content-end pt-2 mb-6">
+            <button id="calculator" type="button" class="btn btn-primary d-flex align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-calculator me-2" viewBox="0 0 16 16">
+                    <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
+                    <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"></path>
+                </svg>
+                <span>
                     {{ 'list.btn_calculate_pricing'|trans|capitalize }}
                     </span>
-                </button>
+            </button>
+        </div>
+        {# --------------------------------------------------------CARD PRESUPUESTO-------------------------------------------------------- #}
+
+        <div id="result" class="card-body" hidden="hidden">
+            <div>
+                <h2 class="text-gray-700">{{ 'list.offer_result'|trans|capitalize }}</h2>
+                <p class="mb-2">
+                    <strong>{{ 'list.created_at'|trans({'%%date%%': dateNow|format_datetime('full','none', timezone='Europe/Madrid')})|capitalize }}</strong>
+                </p>
+                <p class="text-muted">
+                    <strong>{{ 'paragraphs.info_offer_expired'|trans|capitalize }}</strong>
+                </p>
             </div>
-            <div id="result" class="card-body" hidden="hidden">
-                <div>
-                    <h2 class="text-gray-700">{{ 'list.offer_result'|trans|capitalize }}</h2>
-                    <p class="mb-2">
-                        <strong>{{ 'list.created_at'|trans({'%%date%%': dateNow|format_datetime('full','none', timezone='Europe/Madrid')})|capitalize }}</strong>
-                    </p>
-                    <p class="text-muted"><strong>{{ 'paragraphs.info_offer_expired'|trans|capitalize }}</strong>
-                    </p>
+            <div class="d-flex col border border-2 border-warning alert alert-warning mb-5">
+                <div class="d-flex align-items-center me-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
+                         class="bi bi-exclamation-octagon-fill text-warning" viewBox="0 0 16 16">
+                        <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"></path>
+                    </svg>
                 </div>
-                <div class="d-flex col border border-2 border-warning alert alert-warning mb-5">
-                    <div class="d-flex align-items-center me-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" fill="currentColor"
-                             class="bi bi-exclamation-octagon-fill text-warning" viewBox="0 0 16 16">
-                            <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zM8 4c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995A.905.905 0 0 1 8 4m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"></path>
-                        </svg>
-                    </div>
-                    <div class="d-flex flex-column pe-0 pe-sm-10">
-                        <h5 class="mb-1">{{ 'paragraphs.info_offer'|trans|capitalize }}</h5>
-                        <span class="text-dark">{{ 'paragraphs.info_offer_expired'|trans|capitalize }}</span>
-                    </div>
+                <div class="d-flex flex-column pe-0 pe-sm-10">
+                    <h5 class="mb-1">{{ 'paragraphs.info_offer'|trans|capitalize }}</h5>
+                    <span class="text-dark">{{ 'paragraphs.info_offer_expired'|trans|capitalize }}</span>
                 </div>
-                <div class="row pb-1">
-                    <div class="col-10 text-end">
-                        <span>{{ 'list.reception'|trans|capitalize }}</span>
-                    </div>
-                    <div class="col-2 text-end">
-                        <span id="total-reception" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
-                    </div>
+            </div>
+
+            <div class="row pb-1">
+                <div class="col-10 text-end">
+                    <span>{{ 'list.reception'|trans|capitalize }}</span>
                 </div>
-                <div class="row pb-1">
-                    <div class="col-10 text-end">
-                        <span>{{ 'list.orders'|trans|capitalize }}</span>
-                    </div>
-                    <div class="col-2 text-end">
-                        <span id="total-orders" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
-                    </div>
+                <div class="col-2 text-end">
+                    <span id="total-reception" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
                 </div>
-                <div class="row pb-1">
-                    <div class="col-10 text-end">
-                        <span>{{ 'list.returns'|trans|capitalize }}</span>
-                    </div>
-                    <div class="col-2 text-end">
-                        <span id="total-returns" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
-                    </div>
+            </div>
+
+            <div class="row pb-1">
+                <div class="col-10 text-end">
+                    <span>{{ 'list.orders'|trans|capitalize }}</span>
                 </div>
-                <div class="row pb-5">
-                    <div class="col-10 text-end">
-                        <span>{{ 'list.storage'|trans|capitalize }}</span>
-                    </div>
-                    <div class="col-2 text-end">
-                        <span id="total-storage" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
-                    </div>
+                <div class="col-2 text-end">
+                    <span id="total-orders" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
                 </div>
-                <div class="border border-top-dashed border-primary"></div>
-                <div class="row pt-5">
-                    <div class="col-10 text-end ">
-                        <h5>{{ 'list.total_amount'|trans|capitalize }}</h5>
-                    </div>
-                    <div class="col-2 text-end">
-                        <h5 class="text-primary">
-                            <span id="total" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
-                        </h5>
-                    </div>
+            </div>
+
+            <div class="row pb-1">
+                <div class="col-10 text-end">
+                    <span>{{ 'list.returns'|trans|capitalize }}</span>
+                </div>
+                <div class="col-2 text-end">
+                    <span id="total-returns" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
+                </div>
+            </div>
+
+            <div class="row pb-5">
+                <div class="col-10 text-end">
+                    <span>{{ 'list.storage'|trans|capitalize }}</span>
+                </div>
+                <div class="col-2 text-end">
+                    <span id="total-storage" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
+                </div>
+            </div>
+
+            <div class="border border-top border-primary"></div>
+            <div class="row pt-5">
+                <div class="col-10 text-end">
+                    <h5>{{ 'list.total_amount'|trans|capitalize }}</h5>
+                </div>
+                <div class="col-2 text-end">
+                    <h5 class="text-primary">
+                        <span id="total" class="pe-2"></span>€/{{ 'list.total_result'|trans }}
+                    </h5>
                 </div>
             </div>
         </div>
     </div>
+
+    {# --------------------------------------------------------FIN CARD-------------------------------------------------------- #}
+
 {% endblock %}
 
     {% block scripts %}
         <script>
-        {#      let shipmentDeliveryZones = {{ shipmentDeliveryZones|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
-            #}
             let quotedArticles = {{ quotedArticles|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
             let receptionsCount = 1;
             let ordersCount = 1;
             let returnsCount = 1;
 
+            /**************apartado de la librería form.repeater + librería select2**************/
+
+            //función para esperar que se cargue todo el DOMvolumeInM3
             $(document).ready(function () {
+
+                //apartado formulario de las entradas de material
                 $('#repeater-reception').repeater({
                     repeaters: [{
                         selector: '.inner-repeater',
@@ -632,6 +709,7 @@
                     }
                 });
 
+                //apartado formulario de los pedidos
                 $('#repeater-orders').repeater({
                     show: function () {
                         $(this).slideDown();
@@ -649,7 +727,7 @@
                     }
                 });
 
-
+                //apartado formulario de devoluciones
                 $('#repeater-returns').repeater({
                     show: function () {
                         $(this).slideDown();
@@ -668,6 +746,10 @@
                 });
             });
 
+            /**************fin del apartado de la librería form.repeater + librería select2**************/
+
+
+            //funciones para cargar las tarifas que tenemos estandar
             function priceReception() {
                 document.querySelector('#reception-pallet-price').value = cost.pallet;
                 document.querySelector('#reception-pallet-price-sku').value = cost.palletExtraSku;
@@ -691,6 +773,7 @@
                 document.querySelector('#load-storage-piking-location').value = cost.storagePickingLocation;
             }
 
+            //valores de la tarifa estándar traída desde el controlador para esta vista y las formateamos aquí
             const cost = {
                 pallet: ({{ costs.pallet / 100 }}).toFixed(2),
                 palletExtraSku: ({{ costs.SKUInPallet / 100 }}).toFixed(2),
@@ -705,6 +788,7 @@
                 picking: ({{ costs.picking / 100 }}).toFixed(2),
             }
 
+            //definimos el objeto que utilizamos para los calculos
             let costs = {
                 admissionPriceReturnsPackage: 0,
                 allReception: 0,
@@ -726,82 +810,98 @@
                 totalReturnsPrice: 0,
                 totalStoragePrice: 0,
 
+                //método en el que obtenemos un valor y lo convierte a un número de coma flotante y retorna el valor, si no puede convertirlo retorna 0
                 getFloatFromSelector: function (selector) {
                     return parseFloat(document.querySelector(selector).value) || 0;
                 },
 
-                getShippingDeliveryRate: function (shippingZoneId, weight) {
-                    if ('' === shippingZoneId) {
+
+                //función que que sumara el valor de la zona y se añadira un plus por su peso
+                getShippingDeliveryRate: function (zoneValue, weight) {
+                    if ('' === zoneValue) {
                         return 0;
                     }
-
-                    if (false === shipmentDeliveryZones.hasOwnProperty(shippingZoneId)) {
-                        return 0;
-                    }
-
                     let returnValue = 0;
 
-                    shipmentDeliveryZones[shippingZoneId].rates.every((rate) => {
-                        let min = Math.min(rate.from, rate.to);
-                        let max = Math.max(rate.from, rate.to);
-
-                        if (weight >= min && weight <= max) {
-                            returnValue = rate.rate / 100;
-
-                            return false;
-                        }
-
-                        return true;
-                    });
+                    if (weight >= 0 && weight <= 1000) {
+                        returnValue = zoneValue + 10;
+                    } else {
+                        returnValue = zoneValue + 30
+                    }
 
                     return returnValue;
+
                 },
 
+
+                //función para calcular las entradas
                 calculateReception: function () {
                     this.pallet = this.getFloatFromSelector('#reception-pallet-price');
                     this.palletExtraSku = this.getFloatFromSelector('#reception-pallet-price-sku');
                     this.box = this.getFloatFromSelector('#load-reception-box');
                     this.boxExtraSku = this.getFloatFromSelector('#load-reception-box-sku');
 
+                    //selecciona todos los elementos con name empiecen con data-repeater-reception y terminen con reception-type
                     let receptionValuesContainer = document.querySelectorAll('[name^="data-repeater-reception["][name$="][reception-type]"]');
                     this.receptions = [];
 
                     receptionValuesContainer.forEach((selectElement) => {
-                        let receptionValues = selectElement.value;
-                        let skuContainer = selectElement.closest('[data-repeater-item]');
-                        if (skuContainer) {
-                            if (skuContainer) {
-                                let uniqueValuesPallet = new Set();
-                                let uniqueValuesBox = new Set();
 
-                                let selectElementsProduct = skuContainer.querySelectorAll('[name^="data-repeater-reception["][name$="][reception-products]"]');
-                                selectElementsProduct.forEach((select) => {
-                                    let selectedValue = select.value;
-                                    if (receptionValues === "pallet") {
-                                        uniqueValuesPallet.add(selectedValue);
-                                    } else {
-                                        uniqueValuesBox.add(selectedValue);
-                                    }
-                                });
-                                let skuCountPallet = uniqueValuesPallet.size - 1;
-                                let skuCountBox = uniqueValuesBox.size - 1;
+                        //obtenemos el valor del receptionValuesContainer actual (que debe de ser el tipo de recepción, como "pallet" o "box")
+                        let receptionValues = selectElement.value;
+
+                        //encuentra el contenedor más cercano que tiene el atributo "data-repeater-item"
+                        let skuContainer = selectElement.closest('[data-repeater-item]');
+
+                        if (skuContainer) {
+
+                            //inicializamos dos variables para almacenar valores únicos de productos según el tipo de recepción
+                            let uniqueValuesPallet = new Set();
+                            let uniqueValuesBox = new Set();
+
+                            //seleccionamos todos los elementos con name que empiecen con data-repeater-reception y termine con reception-products
+                            let selectElementsProduct = skuContainer.querySelectorAll('[name^="data-repeater-reception["][name$="][reception-products]"]');
+                            selectElementsProduct.forEach((select) => {
+
+                                //obtenemos el valor del selectElementsProduct actual (un producto seleccionado)
+                                let selectedValue = select.value;
+
+                                //si el tipo de recepción es pallet, añade el valor al conjunto de uniqueValuesPallet si no uniqueValuesBox
                                 if (receptionValues === "pallet") {
-                                    this.allReception = skuCountPallet * this.palletExtraSku + this.pallet;
+                                    uniqueValuesPallet.add(selectedValue);
                                 } else {
-                                    this.allReception = skuCountBox * this.boxExtraSku + this.box;
+                                    uniqueValuesBox.add(selectedValue);
                                 }
-                                this.receptions.push({
-                                    type: receptionValues,
-                                    unitsPallet: skuCountPallet,
-                                    unitsBox: skuCountBox,
-                                    prices: this.allReception
-                                });
+                            });
+
+                            //calculamos el número de SKU únicos menos 1 para palets y cajas ya que el primer bulto esta
+                            // incluido (para que no se cobre el pallet o caja vacíos)
+                            let skuCountPallet = uniqueValuesPallet.size - 1;
+                            let skuCountBox = uniqueValuesBox.size - 1;
+
+                            //si recibimos pallet aquí calculamos el precio total para palets si no para cajas
+                            if (receptionValues === "pallet") {
+                                this.allReception = skuCountPallet * this.palletExtraSku + this.pallet;
+                            } else {
+                                this.allReception = skuCountBox * this.boxExtraSku + this.box;
                             }
+                            //objeto con los detalles de la recepción al array receptions
+                            this.receptions.push({
+                                type: receptionValues,
+                                unitsPallet: skuCountPallet,
+                                unitsBox: skuCountBox,
+                                prices: this.allReception
+                            });
                         }
+
                     });
+
+                    //calculamos el total que vamos sumando en cada iteración de entry es el objeto actual de la iteración
+                    //dentro del array this.receptions. El 0 es el valor inicial
                     this.totalReceptionPrice = this.receptions.reduce((total, entry) => total + entry.prices, 0);
                 },
 
+                //función para calcular las pedidos
                 calculateOrders: function () {
                     this.totalOrdersPrice = 0;
                     this.pricePerPreparation = this.getFloatFromSelector('#load-order-preparation');
@@ -809,42 +909,58 @@
                     this.pricePerPicking = this.getFloatFromSelector('#load-order-picking');
 
                     for (let i = 0; i < ordersCount; i++) {
-                        let numberOfExpectedOrders = jQuery(`[name="[${i}][orders-number]"]`).val();
-                        let articles = jQuery(`[name="[${i}][orders-products][]"]`).val();
-                        let numberOfArticles = articles.length;
-                        let shippingZoneId = jQuery(`[name="[${i}][orders-zone]`).val();
-                        let weight = articles.reduce((total, articleId) => total + quotedArticles[articleId].weightInGrams, 0);
-                        let shippingCost = this.getShippingDeliveryRate(shippingZoneId, weight);
 
-                        let unitaryPrice = this.pricePerPreparation + this.pricePerPacking + shippingCost + (numberOfArticles * this.pricePerPicking);
-                        let total = numberOfExpectedOrders * unitaryPrice;
+                        //Obtenemos el número de pedidos
+                        let numberOfExpectedOrders = jQuery(`[name="data-repeater-orders[${i}][orders-number]"]`).val();
+
+                        //Obtenemos los IDs de los artículos
+                        let articles = jQuery(`[name="data-repeater-orders[${i}][orders-products][]"]`).val();
+
+                        //número de pedidos
+                        let numberOfArticles = articles.length;
+
+                        //obtenemos el valor de la zona de envío
+                        let shippingZoneValueOrder = jQuery(`[name="data-repeater-orders[${i}][orders-zone]"]`).val();
+
+                        //calculamos el peso total de los artículos  sumamos los pesos individuales de cada artículo
+                        let weight = articles.reduce((total, articleId) => total + quotedArticles[articleId].weightInGrams, 0);
+
+                        //obtenemos el coste de envío en la zona de envío y el peso total
+                        let shippingCostOrder = this.getShippingDeliveryRate(Number(shippingZoneValueOrder), weight);
+
+                        //calculamos el precio del pedido sumando los costes de preparación, embalaje, picking y envío
+                        let unitaryPrice = this.pricePerPreparation + this.pricePerPacking + shippingCostOrder + (numberOfArticles * this.pricePerPicking);
+
+                        //calculamos el total para el pedido actual multiplicando el precio unitario por el número de pedidos esperados
+                        let total = Number(numberOfExpectedOrders) * unitaryPrice;
+
+                        //lo sumamos todo y obtenemos el total
                         this.totalOrdersPrice += total;
                     }
                 },
 
+                //función para calcular las devoluciones
                 calculateReturns:
                     function () {
                         this.admissionPriceReturnsPackage = this.getFloatFromSelector('#load-returns');
                         this.returnsReview = this.getFloatFromSelector('#load-returns-review');
                         this.totalReturnsPrice = 0;
 
-                        console.log(`Returns price is ${this.admissionPriceReturnsPackage}€ per package and a fee of ${this.returnsReview}€ per article reviewed.`);
-
                         for (let i = 0; i < returnsCount; i++) {
-                            let numberOfExpectedReturns = jQuery(`[name="data-returns[${i}][returns-numbers]"]`).val();
+                            let numberOfExpectedReturns = jQuery(`[name="data-returns[${i}][returns-number]"]`).val();
                             let articles = jQuery(`[name="data-returns[${i}][returns-products][]"]`).val();
                             let numberOfArticles = articles.length;
-                            let shippingZoneId = jQuery(`[name="data-returns[${i}][returns-zone]"]`).val();
+                            let shippingZoneValueReturns = jQuery(`[name="data-returns[${i}][returns-zone]"]`).val();
                             let weight = articles.reduce((total, articleId) => total + quotedArticles[articleId].weightInGrams, 0);
-                            let shippingCost = this.getShippingDeliveryRate(shippingZoneId, weight);
-
-                            let unitaryPrice = this.admissionPriceReturnsPackage + shippingCost + (numberOfArticles * this.returnsReview);
-                            let total = numberOfExpectedReturns * unitaryPrice;
+                            let shippingCostReturns = this.getShippingDeliveryRate(Number(shippingZoneValueReturns), weight);
+                            let unitaryPrice = this.admissionPriceReturnsPackage + shippingCostReturns + (numberOfArticles * this.returnsReview);
+                            let total = Number(numberOfExpectedReturns) * unitaryPrice;
 
                             this.totalReturnsPrice += total;
                         }
                     },
 
+                //función para calcular las almacenamiento
                 calculateStorage: function () {
                     this.storageMonth = this.getFloatFromSelector('#load-storage');
                     this.storagePickingLocation = this.getFloatFromSelector('#load-storage-piking-location');
@@ -854,6 +970,7 @@
                     this.totalStoragePrice = ((palletVolume / this.palletDimensions) * this.storageMonth) + (pickingSlot * this.storagePickingLocation);
                 },
 
+                //función para calcular total
                 calculateTotal: function () {
                     this.amount = this.totalReceptionPrice + this.totalOrdersPrice + this.totalReturnsPrice + this.totalStoragePrice;
                     $('#total-reception').html(costs.totalReceptionPrice.toFixed(2));
@@ -864,6 +981,7 @@
                 },
             }
 
+            //función para que aparezca el presupuesto debajo del acordeón
             $(document).ready(function () {
                 $('#calculator').on('click', function () {
                     $('#result').removeAttr('hidden');
@@ -874,6 +992,5 @@
                     costs.calculateTotal();
                 });
             });
-
         </script>
     {% endblock %}

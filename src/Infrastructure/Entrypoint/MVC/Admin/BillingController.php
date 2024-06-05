@@ -25,11 +25,15 @@ use Symfony\Component\Uid\Uuid;
 #[IsGranted('ROLE_ADMIN')]
 class BillingController extends AbstractController
 {
+    /*
+     * tratamos los datos que nos llegan
+     * [Un trait es un conjunto de métodos que puedes incluir en una o más clases. Los traits permiten compartir
+     * funcionalidades entre clases sin la necesidad de herencia múltiple] **
+    */
     use HandleTrait;
 
     public function __construct(
         MessageBusInterface $messageBus,
-
     )
     {
         $this->messageBus = $messageBus;
@@ -42,38 +46,41 @@ class BillingController extends AbstractController
     ): Response
     {
         $cost = Cost::buildFromScratch();
+
         $shipmentDelivery = [
-            'ES-AN' => ['zone' => 'zona 3', 'value' => 3000],
-            'ES-AR' => ['zone' => 'zona 1', 'value' => 1000],
-            'ES-AS' => ['zone' => 'zona 1', 'value' => 1000],
-            'ES-IB' => ['zone' => 'zona 4', 'value' => 4000],
-            'ES-CN' => ['zone' => 'zona 5', 'value' => 5000],
-            'ES-CB' => ['zone' => 'zona 1', 'value' => 1000],
-            'ES-CM' => ['zone' => 'zona 2', 'value' => 2000],
-            'ES-CL' => ['zone' => 'zona 2', 'value' => 2000],
-            'ES-CT' => ['zone' => 'zona 1', 'value' => 1000],
-            'ES-EX' => ['zone' => 'zona 2', 'value' => 2000],
-            'ES-GA' => ['zone' => 'zona 1', 'value' => 1000],
-            'ES-MD' => ['zone' => 'zona 2', 'value' => 2000],
-            'ES-MC' => ['zone' => 'zona 3', 'value' => 3000],
-            'ES-NC' => ['zone' => 'zona 1', 'value' => 1000],
-            'ES-PV' => ['zone' => 'zona 1', 'value' => 1000],
-            'ES-RI' => ['zone' => 'zona 1', 'value' => 1000],
-            'ES-VC' => ['zone' => 'zona 3', 'value' => 3000],
-            'ES-CE' => ['zone' => 'zona 4', 'value' => 4000],
-            'ES-ML' => ['zone' => 'zona 4', 'value' => 4000],
+            'ES-AN' => ['zone' => 'zona 3', 'value' => 30],
+            'ES-AR' => ['zone' => 'zona 1', 'value' => 10],
+            'ES-AS' => ['zone' => 'zona 1', 'value' => 10],
+            'ES-IB' => ['zone' => 'zona 4', 'value' => 40],
+            'ES-CN' => ['zone' => 'zona 5', 'value' => 50],
+            'ES-CB' => ['zone' => 'zona 1', 'value' => 10],
+            'ES-CM' => ['zone' => 'zona 2', 'value' => 20],
+            'ES-CL' => ['zone' => 'zona 2', 'value' => 20],
+            'ES-CT' => ['zone' => 'zona 1', 'value' => 10],
+            'ES-EX' => ['zone' => 'zona 2', 'value' => 20],
+            'ES-GA' => ['zone' => 'zona 1', 'value' => 10],
+            'ES-MD' => ['zone' => 'zona 2', 'value' => 20],
+            'ES-MC' => ['zone' => 'zona 3', 'value' => 30],
+            'ES-NC' => ['zone' => 'zona 1', 'value' => 10],
+            'ES-PV' => ['zone' => 'zona 1', 'value' => 10],
+            'ES-RI' => ['zone' => 'zona 1', 'value' => 10],
+            'ES-VC' => ['zone' => 'zona 3', 'value' => 30],
+            'ES-CE' => ['zone' => 'zona 4', 'value' => 40],
+            'ES-ML' => ['zone' => 'zona 4', 'value' => 40],
         ];
 
+        //renderizamos la vista y nos llevamos lo valores de los objetos y de la base de datos
         return $this->render(
             'Admin/cost_simulator.html.twig',
             [
                 'costs' => $cost,
                 'quotedArticles' => $quotedArticleRepository->findAllSortedByName(),
-                'shipmentDeliveryZones' => $shipmentDelivery
+                'shipmentDeliveryZones' => $shipmentDelivery,
             ],
         );
     }
 
+    //controlador de la vista de QuotedArticle donde aparecera la vista listando los QuotedArticle que tenemos en la base de datos
     #[Cache(public: false)]
     #[Route('/cost-simulator/quoted-article', name: 'admin_quoted_article')]
     public function listQuotedArticle(QuotedArticleRepository $quotedArticleRepository): Response
@@ -85,13 +92,16 @@ class BillingController extends AbstractController
         ]);
     }
 
+    // controlador de la vista de creación de QuotedArticle que luego se suben a la base de datos
     #[Cache(public: false)]
     #[Route('/cost-simulator/quoted-article/new', name: 'admin_create_quoted_article')]
     public function createQuotedArticle(Request $request): Response
     {
+        //creamos el formulario para crear un nuevo quotedArticle
         $form = $this->createForm(CreateOrUpdateQuotedArticleForm::class);
         $form->handleRequest($request);
 
+        //sí cuando se envía el formulario es válido y tiene formato de array (assert(\is_array)), actualizar el QuotedArticle
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             \assert(\is_array($data));
@@ -101,12 +111,13 @@ class BillingController extends AbstractController
                 [
                     CreateQuotedArticleRequest::PARAM_ID => Uuid::v4()->toRfc4122(),
                     CreateQuotedArticleRequest::PARAM_NAME => $data['name'] ?? null,
-                    CreateQuotedArticleRequest::PARAM_VOLUME => $data['volumeInM3'],
+                    CreateQuotedArticleRequest::PARAM_VOLUME => $data['volumeInCm3'],
                     CreateQuotedArticleRequest::PARAM_WEIGHT => $data['weightInGrams'],
                 ],
             );
             $this->handle($createQuotedArticleRequest);
 
+            //mensaje de confirmación
             $this->addFlash('success', new TranslatableMessage(
                 'notification.quotedArticle.created',
                 ['%%name%%' => $data['name']],
@@ -124,21 +135,25 @@ class BillingController extends AbstractController
         );
     }
 
+    // controlador de la vista de actualización de QuotedArticle donde se selecciona el QuotedArticle y además mostramos
+    // sus parámetros y que podemos modificar para que luego se suban a la base de datos ya modificados
     #[Cache(public: false)]
     #[Route('/cost-simulator/quoted-article/{quotedArticle}/update', name: 'admin_quoted_article_update')]
     public function updateQuotedArticle(QuotedArticle $quotedArticle, Request $request): Response
     {
+        //rellenamos el formulario con los datos del QuotedArticle que vamos a modificar
         $form = $this->createForm(
             CreateOrUpdateQuotedArticleForm::class,
             [
                 'name' => $quotedArticle->name(),
-                'volumeInM3' => $quotedArticle->volumeInM3(),
+                'volumeInCm3' => $quotedArticle->volumeInCm3(),
                 'weightInGrams' => $quotedArticle->weightInGrams(),
             ],
         );
 
         $form->handleRequest($request);
 
+        //sí cuando se envía el formulario es válido y tiene formato de array (assert(\is_array)), actualizar el QuotedArticle
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             \assert(\is_array($data));
@@ -148,7 +163,7 @@ class BillingController extends AbstractController
                 [
                     UpdateQuotedArticleRequest::PARAM_ID => $quotedArticle->id()->toRfc4122(),
                     UpdateQuotedArticleRequest::PARAM_NAME => $data['name'] ?? null,
-                    UpdateQuotedArticleRequest::PARAM_VOLUME => $data['volumeInM3'],
+                    UpdateQuotedArticleRequest::PARAM_VOLUME => $data['volumeInCm3'],
                     UpdateQuotedArticleRequest::PARAM_WEIGHT => $data['weightInGrams'],
                 ],
             );
@@ -160,9 +175,11 @@ class BillingController extends AbstractController
                 'notifications',
             ));
 
+            //volvemos a la vista del listado
             return $this->redirectToRoute('admin_quoted_article');
         }
 
+        //devolvemos la vista con el QuotedArticle
         return $this->render(
             'Admin/cost_simulator_quoted_article.html.twig',
             [

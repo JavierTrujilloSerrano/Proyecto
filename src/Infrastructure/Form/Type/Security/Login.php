@@ -24,6 +24,7 @@ use Symfony\Component\Security\Http\SecurityRequestAttributes;
 
 class Login extends AbstractAuthenticator implements AuthenticatorInterface
 {
+    //apartado que se va a encargar de la seguridad de acceso para nuestros usuarios y de redireccionamiento de éstos
     private UserRepository $userRepository;
     private RouterInterface $router;
 

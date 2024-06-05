@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 namespace Proyecto\Domain\Model\Cost;
+
+//clase donde definimos los costes de nuestras tarifas
 class Cost
 {
     public const int MAIN_PALLET = 400;
