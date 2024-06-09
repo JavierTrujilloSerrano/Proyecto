@@ -15,9 +15,9 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb ms-4">
             <li class="breadcrumb-item">
-                <a href="{{ path('login-view') }}">
+                <a href="{{ path('admin_cost_simulator') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                         class="bi bi-house-door-fill home_green" viewBox="0 0 16 16">
                         <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"></path>
                     </svg>
                 </a>
@@ -33,7 +33,7 @@
 
 {% block view_toolbar_button %}
     <div class="d-flex justify-content-end mx-5">
-        <a href="{{ path('admin_quoted_article') }}" class="btn btn-primary">
+        <a href="{{ path('admin_quoted_article') }}" class="btn button button_color_green">
             <div class="d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list"
                      viewBox="0 0 16 16">
@@ -64,7 +64,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="accordion-header-reception">
-                        <button class="accordion-button fs-4 text-primary text-start pe-4"
+                        <button class="accordion-button fs-4 accordion_button text-light text-start pe-4"
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#accordion-body-reception"
@@ -81,7 +81,7 @@
                     </h2>
                     <div id="accordion-body-reception" class="accordion-collapse collapse show">
                         <div class="accordion-body">
-                            <H5 class="mb-4">{{ 'paragraphs.info_reception'|trans|capitalize }}</H5>
+                            <h4 class="mb-4 text_blue">{{ 'paragraphs.info_reception'|trans|capitalize }}</h4>
                             <div class="row d-flex align-items-end">
                                 <div class="text-muted col-2">
                                     <label for="reception-pallet-price">{{ 'list.pallet_price'|trans|capitalize }}</label>
@@ -111,7 +111,7 @@
                                            value="0">
                                 </div>
                                 <div class="align-self-end col-2">
-                                    <button class="btn btn-primary" onclick="priceReception()">
+                                    <button class="btn button button_color_green" onclick="priceReception()">
                                         {{ 'list.btn_load'|trans|capitalize }}
                                     </button>
                                 </div>
@@ -123,7 +123,7 @@
                             <div id="repeater-reception">
                                 <div class="mt-4">
                                     <div data-repeater-list="data-repeater-reception">
-                                        <div data-repeater-item class="d-flex-row border border-3">
+                                        <div data-repeater-item class="d-flex-row">
                                             <div class="row text-gray-600 fw-bolder mb-3">
                                                 <div class="d-flex align-items-center col-md-2">
                                                     {{ 'list.type_of_package'|trans |upper }}
@@ -205,7 +205,7 @@
                                                         </div>
                                                     </div>
                                                     <button id="addSku"
-                                                            class="d-flex align-items-center btn btn-primary mt-2 mb-5"
+                                                            class="d-flex align-items-center btn button button_color_green mt-2 mb-5"
                                                             data-repeater-create type="button">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                              fill="currentColor" class="bi bi-plus-square me-2"
@@ -225,7 +225,7 @@
 
                                 <div id="reception" class="mt-1">
                                     <button href="javascript:void(0)" data-repeater-create
-                                            class="d-flex align-items-center btn btn-primary">
+                                            class="d-flex align-items-center btn button button_color_green">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor" class="bi bi-plus-square me-2" viewBox="0 0 16 16">
                                             <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
@@ -250,7 +250,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="accordion-header-orders">
-                        <button class="accordion-button collapsed fs-4 text-primary text-start pe-4"
+                        <button class="accordion-button accordion_button collapsed fs-4 text-light text-start pe-4"
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#accordion-body-orders"
@@ -266,7 +266,7 @@
                     </h2>
                     <div id="accordion-body-orders" class="accordion-collapse collapse">
                         <div class="accordion-body">
-                            <H5 class="mb-4">{{ 'paragraphs.info_order'|trans|capitalize }}</H5>
+                            <h4 class="mb-4 text_blue">{{ 'paragraphs.info_order'|trans|capitalize }}</h4>
                             <div class="row d-flex align-items-end">
                                 <div class="text-muted col-md-3">
                                     <label for="load-order-preparation">{{ 'list.preparation_price'|trans|capitalize }}</label>
@@ -287,7 +287,7 @@
                                            value="0">
                                 </div>
                                 <div class="align-self-end col-md-3">
-                                    <button class="btn btn-primary"
+                                    <button class="btn button button_color_green"
                                             onclick="priceOrders()">
                                         {{ 'list.btn_load'|trans|capitalize }}
                                     </button>
@@ -357,7 +357,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <button data-repeater-create
-                                            class="btn btn-flex btn-primary d-flex align-items-center">
+                                            class="btn btn-flex button button_color_green d-flex align-items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor" class="bi bi-plus-square me-2" viewBox="0 0 16 16">
                                             <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
@@ -382,7 +382,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="accordion-header-returns">
-                        <button class="accordion-button collapsed fs-4 text-primary text-start pe-4"
+                        <button class="accordion-button accordion_button collapsed fs-4 text-light text-start pe-4"
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#accordion-body-returns"
@@ -398,7 +398,7 @@
                     </h2>
                     <div id="accordion-body-returns" class="accordion-collapse collapse">
                         <div class="accordion-body">
-                            <h5 class="mb-4">{{ 'paragraphs.info_returns'|trans|capitalize }}</h5>
+                            <h4 class="mb-4 text_blue">{{ 'paragraphs.info_returns'|trans|capitalize }}</h4>
                             <div class="row d-flex align-items-end">
                                 <div class="text-muted col-md-4">
                                     <label for="load-returns">{{ 'list.return_review'|trans|capitalize }}</label>
@@ -414,7 +414,7 @@
                                            value="0">
                                 </div>
                                 <div class="align-self-end col-md-2">
-                                    <button class="btn btn-primary"
+                                    <button class="btn button button_color_green"
                                             onclick="priceReturns()">{{ 'list.btn_load'|trans|capitalize }}</button>
                                 </div>
                             </div>
@@ -482,7 +482,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <button href="javascript:void(0)" data-repeater-create
-                                            class="btn btn-flex btn-primary d-flex align-items-center">
+                                            class="btn btn-flex button button_color_green d-flex align-items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor" class="bi bi-plus-square me-2" viewBox="0 0 16 16">
                                             <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>
@@ -507,7 +507,7 @@
 
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="accordion-header-storage">
-                        <button class="accordion-button collapsed fs-4 text-primary text-start pe-4"
+                        <button class="accordion-button accordion_button collapsed fs-4 text-light text-start pe-4"
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#accordion-body-storage"
@@ -523,7 +523,7 @@
                     </h2>
                     <div id="accordion-body-storage" class="accordion-collapse collapse">
                         <div class="accordion-body">
-                            <h5 class="mb-4">{{ 'paragraphs.info_storage'|trans|capitalize }}</h5>
+                            <h4 class="mb-4 text_blue">{{ 'paragraphs.info_storage'|trans|capitalize }}</h4>
                             <div class="row d-flex align-items-end">
                                 <div class="text-muted col-md-3">
                                     <label for="load-storage">{{ 'list.pallet_price'|trans|capitalize }}</label>
@@ -538,7 +538,7 @@
                                            value="0">
                                 </div>
                                 <div class="align-self-end col-md-3">
-                                    <button class="btn btn-primary" onclick="priceStorage()">
+                                    <button class="btn button button_color_green" onclick="priceStorage()">
                                         {{ 'list.btn_load'|trans|capitalize }}
                                     </button>
                                 </div>
@@ -579,8 +579,8 @@
 
         {# --------------------------------------------------------BOTÓN CALCULAR-------------------------------------------------------- #}
 
-        <div class="d-flex mx-5 justify-content-end pt-2 mb-6">
-            <button id="calculator" type="button" class="btn btn-primary d-flex align-items-center">
+        <div class="d-flex mx-5 justify-content-end pt-2 mb-6 pb-5">
+            <button id="calculator" type="button" class="btn button button_color_green d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-calculator me-2" viewBox="0 0 16 16">
                     <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"></path>

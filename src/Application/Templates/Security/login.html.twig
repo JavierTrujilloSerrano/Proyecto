@@ -2,16 +2,17 @@
 {% trans_default_domain "security" %}
 {% block content %}
     <section class="d-flex flex-column min-vh-100">
-
-        <div class="container my-auto">
+{# página principal de login #}
+        <div class="container my-md-auto">
             <div class="row justify-content-center align-items-center">
-                <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                         class="img-fluid" alt="image">
+                <div class="col-md-8 col-lg-6 col-xl-6 p-0">
+                    <img src="{{ asset('assets/img/logo1.svg') }}"
+                         class="img-fluid my-md-5" alt="image">
                 </div>
-                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-                    <form action="{{ path('login-view') }}" method="post">
 
+                <div class="col-md-7 col-lg-6 col-xl-5 offset-xl-1">
+                    <form action="{{ path('login-view') }}" method="post">
+                        {# mensaje de error cuando te logeas #}
                         {% if error %}
                             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
@@ -38,7 +39,7 @@
                         </div>
                         <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" data-mdb-button-init data-mdb-ripple-init
-                                    class="btn btn-primary btn-lg"
+                                    class="btn button button_color_green btn-lg"
                                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Login
                             </button>
 
@@ -53,6 +54,6 @@
             </div>
         </div>
     </section>
-    {% block footer_classes %} fixed-bottom {% endblock %}
+    <a hidden="hidden">{% block footer_classes %} fixed-bottom {% endblock %}</a>
 {% endblock %}
 
