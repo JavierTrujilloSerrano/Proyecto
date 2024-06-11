@@ -7,9 +7,14 @@ use JsonSerializable;
 
 class DeleteQuotedArticleResponse implements JsonSerializable
 {
-    public function __construct()
+    public function __construct(private string $name)
     {
-        // intentionally left blank
+
+    }
+
+    public function name():string
+    {
+        return $this->name;
     }
 
     public function jsonSerialize(): array

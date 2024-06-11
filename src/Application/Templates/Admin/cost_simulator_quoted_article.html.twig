@@ -5,9 +5,9 @@
 dependiendo si es crear o actualizar saldra un titulo con el nombre del quotedArticle o de creación de artículo #}
 {% block view_title %}
     {% if quotedArticle is defined %}
-        <h1 class="m-4"> {{ 'list.update_quotedArticle'|trans|capitalize }} {{ quotedArticle.name }}</h1>
+        <h1 class="m-4"><img src="{{ asset('assets/img/icon.svg') }}" class="mx-2" alt="icon" height="60px">{{ 'list.update_quotedArticle'|trans|capitalize }} {{ quotedArticle.name }}</h1>
     {% else %}
-        <h1 class="m-4"> {{ 'create_article_cost_simulator_breadcrumbs'|trans|capitalize }}</h1>
+        <h1 class="m-4"><img src="{{ asset('assets/img/icon.svg') }}" class="mx-2" alt="icon" height="60px">{{ 'create_article_cost_simulator_breadcrumbs'|trans|capitalize }}</h1>
     {% endif %}
 {% endblock %}
 
@@ -47,7 +47,7 @@ dependiendo si es crear o actualizar saldra un titulo con el nombre del quotedAr
 {% block content %}
     <div class="card border-0">
         <div class="card-body">
-            <h2>{{ 'list.product_list'|trans|capitalize }}</h2>
+            <h2 class="ms-3">{{ 'list.product_list'|trans|capitalize }}</h2>
 
             {# formulario para crear o actualizar un quotedArticle #}
             <div class="card border-0">

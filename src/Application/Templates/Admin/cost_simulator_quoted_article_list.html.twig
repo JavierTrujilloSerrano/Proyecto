@@ -2,9 +2,7 @@
 {% trans_default_domain 'cost_simulator' %}
 
 {% block view_title %}
-
         <h1 class="m-4"><img src="{{ asset('assets/img/icon.svg') }}" class="mx-2" alt="icon" height="60px">{{ 'page_title_new'|trans }}</h1>
-
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -56,7 +54,7 @@
 {% block content %}
     <div class="card border-0">
         <div class="card-body">
-            <h2 class="mb-10">{{ 'list.product_list'|trans |capitalize }}</h2>
+            <h2 class="ms-2 mb-10">{{ 'list.product_list'|trans |capitalize }}</h2>
 
             {# creamos la tabla con los quotedArticles que tenemos en la base de datos  #}
             <div class="table-responsive">
@@ -79,7 +77,7 @@
                             <td>{{ quotedArticle.weightInGrams|format_number }} Gr</td>
                             <td>
                                 <div>
-                                    <a href="{{ path('admin_quoted_article_update', {'quotedArticle': quotedArticle.id}) }}">
+                                    <a href="{{ path('admin_quoted_article_update', {'quotedArticleId': quotedArticle.id}) }}">
                                         <span class="px-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                  fill="currentColor" class="bi bi-pencil-square me-4"
@@ -90,7 +88,7 @@
                                             </svg>
                                         </span>
                                     </a>
-                                    <a href="{{ path('admin_quoted_article_delete', {'quotedArticle': quotedArticle.id}) }}"
+                                    <a href="{{ path('admin_quoted_article_delete', {'quotedArticleId': quotedArticle.id}) }}"
                                        onclick="return confirm('{{ 'actions.confirm_delete'|trans({'%%name%%': quotedArticle.name}) }}');">
                                         <span class="px-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
@@ -110,7 +108,8 @@
             </div>
         </div>
     </div>
+    {# añadimos una clase al footer para modificar su comportamiento #}
+    <a hidden="hidden">{% block footer_classes %} fixed-bottom {% endblock %}</a>
 {% endblock %}
 
-    {# añadimos una clase al footer para modificar su comportamiento #}
-{% block footer_classes %} fixed-bottom {% endblock %}
+

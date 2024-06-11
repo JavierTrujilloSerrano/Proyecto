@@ -31,7 +31,7 @@ recreate-db-and-fixtures:
 		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:database:drop --force
 		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:database:create
 		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:schema:create
-		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:fixtures:load
+		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:fixtures:load  --no-interaction
 
 grumphp:
 		docker compose run --rm -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} grumphp run

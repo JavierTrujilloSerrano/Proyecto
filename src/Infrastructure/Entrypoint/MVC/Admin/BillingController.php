@@ -7,6 +7,7 @@ use Proyecto\Application\UseCase\CreateQuotedArticle\CreateQuotedArticleRequest;
 use Proyecto\Application\UseCase\DeleteQuotedArticle\DeleteQuotedArticleRequest;
 use Proyecto\Application\UseCase\UpdateQuotedArticle\UpdateQuotedArticleRequest;
 use Proyecto\Domain\Model\Cost\Cost;
+use Proyecto\Domain\Model\Quote\Exception\QuotedArticleNotFoundException;
 use Proyecto\Domain\Model\Quote\QuotedArticle;
 use Proyecto\Domain\Model\Quote\QuotedArticleRepository;
 use Proyecto\Infrastructure\Form\Type\QuotedArticle\CreateOrUpdateQuotedArticleForm;
@@ -34,6 +35,7 @@ class BillingController extends AbstractController
 
     public function __construct(
         MessageBusInterface $messageBus,
+        private QuotedArticleRepository $quotedArticleRepository,
     )
     {
         $this->messageBus = $messageBus;
@@ -138,9 +140,16 @@ class BillingController extends AbstractController
     // controlador de la vista de actualización de QuotedArticle donde se selecciona el QuotedArticle y además mostramos
     // sus parámetros y que podemos modificar para que luego se suban a la base de datos ya modificados
     #[Cache(public: false)]
-    #[Route('/cost-simulator/quoted-article/{quotedArticle}/update', name: 'admin_quoted_article_update')]
-    public function updateQuotedArticle(QuotedArticle $quotedArticle, Request $request): Response
+    #[Route('/cost-simulator/quoted-article/{quotedArticleId}/update', name: 'admin_quoted_article_update')]
+    public function updateQuotedArticle(Uuid $quotedArticleId, Request $request): Response
     {
+        //para que nos muestre la excepción si no encuentra el artículo por el id de update
+        $quotedArticle = $this->quotedArticleRepository->findOneBy(['id' => $quotedArticleId]);
+
+        if (null === $quotedArticle) {
+            throw QuotedArticleNotFoundException::fromId($quotedArticleId);
+        }
+
         //rellenamos el formulario con los datos del QuotedArticle que vamos a modificar
         $form = $this->createForm(
             CreateOrUpdateQuotedArticleForm::class,
@@ -190,19 +199,19 @@ class BillingController extends AbstractController
     }
 
     #[Cache(public: false)]
-    #[Route('/cost-simulator/quoted-article/{quotedArticle}/delete', name: 'admin_quoted_article_delete')]
-    public function deleteQuotedArticle(QuotedArticle $quotedArticle, Request $request): Response
+    #[Route('/cost-simulator/quoted-article/{quotedArticleId}/delete', name: 'admin_quoted_article_delete')]
+    public function deleteQuotedArticle(Uuid $quotedArticleId, Request $request): Response
     {
         $deleteQuotedArticle = DeleteQuotedArticleRequest::fromPayload(
             Uuid::v4(),
-            [DeleteQuotedArticleRequest::PARAM_ID => $quotedArticle->id()->toRfc4122()],
+            [DeleteQuotedArticleRequest::PARAM_ID => $quotedArticleId->toRfc4122()],
         );
 
-        $this->handle($deleteQuotedArticle);
+        $response = $this->handle($deleteQuotedArticle);
 
         $this->addFlash('success', new TranslatableMessage(
             'notification.quotedArticle.deleted',
-            ['%%name%%' => $quotedArticle->name()],
+            ['%%name%%' => $response->name()],
             'notifications',
         ));
 
