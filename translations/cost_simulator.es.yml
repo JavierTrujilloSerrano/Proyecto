@@ -4,6 +4,8 @@ page_title_new: 'Simulador de costes - Lista de artículos'
 home_breadcrumbs: 'simulador de tarifas'
 list_cost_simulator_breadcrumbs: 'listado de productos'
 create_article_cost_simulator_breadcrumbs: 'creación de artículo'
+app_cost_simulator: 'Simulador de Costes'
+exit: 'salir'
 list:
     th_name: 'Nombre'
     th_volume: 'Volumen'

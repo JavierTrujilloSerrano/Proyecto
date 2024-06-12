@@ -5,6 +5,7 @@ namespace Proyecto\Domain\Model;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
+// clase para configurar que todos los repositorios tenga un método persist, flush, etc...
 abstract class AbstractRepository extends ServiceEntityRepository
 {
     public function persist(object $entity): void
