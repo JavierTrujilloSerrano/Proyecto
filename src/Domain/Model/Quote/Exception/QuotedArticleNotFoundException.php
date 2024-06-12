@@ -6,8 +6,7 @@ namespace Proyecto\Domain\Model\Quote\Exception;
 use Proyecto\Domain\Model\Shared\UserFriendlyException;
 use Symfony\Component\Uid\Uuid;
 
-//clase es una excepción si no se encuentra el artículo que se busca
-
+//clase que crea una excepción por error si no se encuentra el artículo que se busca, si no lo encuentra crea y muestra un mensaje de aviso
 class QuotedArticleNotFoundException extends UserFriendlyException
 {
     public static function fromId(Uuid $id): static

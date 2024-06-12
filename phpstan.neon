@@ -1,0 +1,9 @@
+parameters:
+  checkGenericClassInNonGenericObjectType: false
+  level: 6
+  customRulesetUsed: true
+  checkMissingIterableValueType: false
+  excludePaths:
+    - %rootDir%/../../../tests/*
+    - %rootDir%/../../../public/*
+    - %rootDir%/../../../config/*

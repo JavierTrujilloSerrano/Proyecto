@@ -1,0 +1,13 @@
+grumphp:
+    tasks:
+        composer:
+            strict: true
+        shell:
+            scripts:
+                - ["-c", "phpstan analyse -l 6 src"]
+        phpunit: ~
+        phpversion:
+            project: '8.3'
+        securitychecker_local:
+            lockfile: ./composer.lock
+            format: ~

@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.select2-search__field {
+    width: 100% !important;
+}
+.text_blue{
+    color: #051b8c;
+
+}
+.home_green{
+    color: #008080;
+}
+.bg_green{
+    background-color: #008080;
+    }
+
+.accordion_button{
+    background-color: rgba(0, 128, 128, 0.45) !important;
+}
+
+.button_color_green{
+    background-color: #008080;
+    color: white;
+}
+
+.button:hover{
+    background-color: rgb(1, 87, 87);
+    color: white;
+}

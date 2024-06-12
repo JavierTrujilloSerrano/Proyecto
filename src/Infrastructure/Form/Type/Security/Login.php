@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Proyecto\Infrastructure\Form\Type\Security;
 
-use Proyecto\Domain\Model\User\User;
-use Proyecto\Domain\Model\User\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,12 +23,10 @@ use Symfony\Component\Security\Http\SecurityRequestAttributes;
 class Login extends AbstractAuthenticator implements AuthenticatorInterface
 {
     //apartado que se va a encargar de la seguridad de acceso para nuestros usuarios y de redireccionamiento de éstos
-    private UserRepository $userRepository;
     private RouterInterface $router;
 
-    public function __construct(UserRepository $userRepository, RouterInterface $router)
+    public function __construct(RouterInterface $router)
     {
-        $this->userRepository = $userRepository;
         $this->router = $router;
     }
 

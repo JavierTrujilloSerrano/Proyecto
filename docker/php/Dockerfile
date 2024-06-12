@@ -6,7 +6,7 @@ COPY --from=composer:2.7.1 /usr/bin/composer /usr/bin/composer
 COPY --from=mlocati/php-extension-installer:2.2.11 /usr/bin/install-php-extensions /usr/local/bin/
 
 RUN apk update \
-    && apk add --no-cache libstdc++ libx11 libxrender libxext \
+    && apk add --no-cache libstdc++ libx11 libxrender libxext git \
     && /usr/local/bin/install-php-extensions pdo_pgsql zip intl xdebug-^3.3
 
 COPY docker/php/config/php.ini /usr/local/etc/php/php.ini

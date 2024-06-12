@@ -5,6 +5,7 @@ namespace Proyecto\Application\UseCase\DeleteQuotedArticle;
 
 use Proyecto\Application\UseCase\DeleteQuotedArticle\DeleteQuotedArticleRequest;
 use Proyecto\Application\UseCase\DeleteQuotedArticle\DeleteQuotedArticleUseCase;
+use Proyecto\Domain\Model\Quote\Exception\QuotedArticleNotFoundException;
 use Proyecto\Domain\Model\Quote\QuotedArticle;
 use Proyecto\Domain\Model\Quote\QuotedArticleRepository;
 use PHPUnit\Framework\TestCase;
@@ -69,6 +70,7 @@ class DeleteQuotedArticleTest extends TestCase
         $this->quotedArticleRepository->expects($this->never())
             ->method('flush');
 
+        $this->expectException(QuotedArticleNotFoundException::class);
         $this->useCase->__invoke($request);
     }
 

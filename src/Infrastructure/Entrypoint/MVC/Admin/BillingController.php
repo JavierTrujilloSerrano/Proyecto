@@ -8,7 +8,6 @@ use Proyecto\Application\UseCase\DeleteQuotedArticle\DeleteQuotedArticleRequest;
 use Proyecto\Application\UseCase\UpdateQuotedArticle\UpdateQuotedArticleRequest;
 use Proyecto\Domain\Model\Cost\Cost;
 use Proyecto\Domain\Model\Quote\Exception\QuotedArticleNotFoundException;
-use Proyecto\Domain\Model\Quote\QuotedArticle;
 use Proyecto\Domain\Model\Quote\QuotedArticleRepository;
 use Proyecto\Infrastructure\Form\Type\QuotedArticle\CreateOrUpdateQuotedArticleForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,7 +34,7 @@ class BillingController extends AbstractController
 
     public function __construct(
         MessageBusInterface $messageBus,
-        private QuotedArticleRepository $quotedArticleRepository,
+        private readonly QuotedArticleRepository $quotedArticleRepository,
     )
     {
         $this->messageBus = $messageBus;

@@ -12,7 +12,7 @@ class UnitConversion
 
     public static function roundToInt(float|int $value): int
     {
-        return \intval(\round($value, 1, \PHP_ROUND_HALF_UP));
+        return \intval(\round($value, 0, \PHP_ROUND_HALF_UP));
     }
 
     public static function toBase100(float|int $naturalValue): int
