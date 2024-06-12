@@ -27,6 +27,12 @@ composer-install:
 cache:
 		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console cache:clear
 
+composer-install:
+		docker compose run --rm -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} composer install
+
+cache:
+		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console cache:clear
+
 recreate-db-and-fixtures:
 		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:database:drop --force
 		docker compose exec -u ${UID}:${GID} ${DOCKER_PHP_SERVICE} bin/console doctrine:database:create
