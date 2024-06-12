@@ -37,11 +37,11 @@
 {% if app.user|default(null) is not null %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
     <div>
-        <a class="navbar-brand p-lg-2" href="{{ path('admin_cost_simulator') }}">Simulador de costes</a>
+        <a class="navbar-brand p-lg-2" href="{{ path('admin_cost_simulator') }}">{{ 'app_cost_simulator'|trans }}</a>
     </div>
     <div>
         {{ app.user.name }}
-        <a class="btn btn-sm btn-warning m-lg-2" href="{{ path('logout-view') }}">Salir</a>
+        <a class="btn btn-sm btn-warning m-lg-2" href="{{ path('logout-view') }}">{{ 'exit'|trans }}</a>
     </div>
 </nav>
 {% endif %}
@@ -69,13 +69,14 @@
     {% block content %}
     {% endblock %}
 </main>
+{% set dateNow = "now" %}
 {# definimos el footer para todos #}
 <footer class="mt-5 {% block footer_classes %}{% endblock %}">
     <div class="container-fluid bg_green py-4">
 
             {#  Información del Autor y Licencia #}
             <div class="d-flex align-items-center justify-content-end text-white">
-                <span>{{ 'author'|trans }} - 2024</span>
+                <span>{{ 'author'|trans }} - {{ "now"|date("Y")  }}</span>
                 <img src="/assets/img/by-sa.svg" alt="CC-BY-SA" class="ms-3">
             </div>
 

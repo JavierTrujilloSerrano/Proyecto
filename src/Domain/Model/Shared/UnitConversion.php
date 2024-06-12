@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Proyecto\Domain\Model\Shared;
 
+// clase para trabajar la moneda en centimos y guardar un entero en vez de un float
 class UnitConversion
 {
     public static function roundToIntWithDivisor(float|int $value, int $divisor): int
